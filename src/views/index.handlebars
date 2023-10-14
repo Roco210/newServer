@@ -1,9 +1,10 @@
 <h1>Welcome to the proyect</h1>
 
-<a href="/realTimeProducts"><button> Realtime</button></a>
-<a href="/allproducts"><button> All product</button></a>
-<a href="/message"><button> Message</button></a>
-<a href="/cart"><button> Cart</button></a>
+<a href="/realTimeProducts"><button class="btn btn-success"> Realtime</button></a>
+<a href="/allproducts"><button class="btn btn-success"> All product</button></a>
+<a href="/message"><button class="btn btn-success"> Message</button></a>
+<a href="/cart"><button class="btn btn-success"> Cart</button></a>
+<a href="/createproduct"><button class="btn btn-success"> createproduct</button></a>
 
 {{#if userLog}}
     {{#each userLog}}
@@ -20,5 +21,5 @@
     {{/if}}
 
 <form action="/api/users/logout" method="get">
-<input type="submit" value="LOG OUT">
+<input type="submit" value="LOG OUT" class="btn btn-success">
 </form>

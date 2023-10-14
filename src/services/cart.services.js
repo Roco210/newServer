@@ -10,3 +10,13 @@ export const cartdata =async ()=>{
     }))
     return allProdMap
 }
+
+export const cartAdmin =(rol)=>{
+    return (req,res,next)=>{
+        const rolUser = req.user.user.isAdmin
+        if (isAdmin) {
+            return "hola"
+        }
+        next()
+    }
+}

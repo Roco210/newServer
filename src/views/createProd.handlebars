@@ -1,0 +1,63 @@
+<h2>Create a new product</h2>
+
+<form action="/api/products" method="post">
+
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="title" class="col-5 col-form-label">TITLE: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" name="title" id="title">
+        </div>
+    </div>
+    <br>
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="description" class="col-5 col-form-label">DESCRIPTION: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" name="description" id="description">
+        </div>
+    </div>
+    <br>
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="price" class="col-sm-2 col-form-label">PRICE: </label>
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control" name="price" id="price">
+        </div>
+    </div>
+    <br>
+    <div class="row g-3 justify-content-md-center">
+        <div class="col-auto">
+            <label for="stock" class="col-sm-2 col-form-label">STOCK: </label>
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control" name="stock" id="stock">
+        </div>
+    </div>
+    <br>
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="code" class="col-sm-5 col-form-label">CODE: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" name="code" id="code">
+        </div>
+    </div>
+    <br>
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="category" class="col-sm-5 col-form-label">CATEGORY: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" name="category" id="category">
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="SEND" class="btn btn-success">
+    
+</form>
+<br>
+<a href="/"><button class="btn btn-success">HOME</button></a>

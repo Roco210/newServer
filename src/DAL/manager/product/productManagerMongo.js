@@ -1,26 +1,20 @@
 import { productModel } from "../../../DAL/models/product.model.js";
 
 class ProductMongo {
-    /* async getproducts(){
-        try{
-            const products =await  productModel.find({})
-            return products
-        }
-        catch(error){return error}
-    } */
+
     async getproducts(limitQ,pageQ,qP,sortO){
         try{
             
             const products= await productModel.paginate(qP,{limit:limitQ,page:pageQ,sort:{price:sortO}})
             const info ={
-                
                 status:products ? "succes":"error",
                 payload:products.docs,
                 docs:products.totalDocs,
                 totalPages:products.totalPages,
                 prevPages: products.prevPage,
                 nextPage:products.nextPage,
-                page:limitQ,
+                page:pageQ,
+                limit:limitQ,
                 hasPrevPage: products.hasPrevPage,
                 hasNextPage: products.hasNextPage,
                 nextLink: products.hasNextPage ? `http:localhost:8080/api/products?page=${products.nextPage}&limit=${limitQ}`:null,

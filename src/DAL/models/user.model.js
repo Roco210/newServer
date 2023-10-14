@@ -23,14 +23,17 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true},
     isAdmin:{
-        type:Boolean,
-        requireed:true,
-        default:false 
+        type:String,
+        required:true,
+        default:"user" 
     },
     githubLog:{
         type:Boolean,
         requireed:true,
         default:false 
+    },
+    cart:{
+        type:String,
     }
 });
 

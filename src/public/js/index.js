@@ -1,7 +1,10 @@
+
 const socketClient = io();
 const prodRealTime = document.getElementById("realTimeProds");
 
-
+const url = document.location.href;
+const read = document.cookie =`url=${url}`
+console.log(document.cookie)
 
 socketClient.on('allProds', (data) => {
 

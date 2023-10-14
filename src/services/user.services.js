@@ -21,3 +21,14 @@ export const userInfo= (user)=>{
     }]
     return objUser
 }
+
+export const authLog = (roles)=>{
+    return(req,res,next)=>{
+        const rol = req.user.user.isAdmin
+        console.log(rol)
+        if(!roles.includes(rol)){
+            res.status(401).json({message:"no tienes permisos"})
+            return}
+        next()
+    }
+} 

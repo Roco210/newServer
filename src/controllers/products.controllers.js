@@ -1,5 +1,6 @@
 
 import {productMongo} from "../DAL/manager/product/productManagerMongo.js"
+import { allProdsObj } from "../services/product.services.js"
 
 export const paginateAllProd =async(req,res)=>{
     const {limit=10,page=1,sortPrice,...query} =req.query
@@ -28,7 +29,7 @@ export const SerchProdbyID = async(req,res)=>{
 
 export const createProd = async(req,res)=>{
     const {title, description, price, thumbnail, code, stock, category, status}=req.body
-    if(!title || !description || !price || !thumbnail || !stock || !code || !category){
+    if(!title || !description || !price  || !stock || !code || !category){
 
         res.status(400).json({mesage:'ERROR: Not all data is complete'})
     }

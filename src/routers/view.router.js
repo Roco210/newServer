@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { userInfo } from "../services/user.services.js";
+import { authLog, userInfo } from "../services/user.services.js";
 import {allProdsObj} from "../services/product.services.js";
 import {cartdata} from "../services/cart.services.js";
 
@@ -26,14 +26,14 @@ router.get('/singup', async (req, res) => {
 
 router.get('/allproducts',passport.authenticate('jwt',{session:false, failureRedirect:"/log"}), async (req, res) => {
     const allProdMap = await allProdsObj()
-    
+    console.log(allProdMap)
     res.render('allprod',{style,allProdMap})
     })
 
 export default router;
 
 router.get('/realTimeProducts',passport.authenticate('jwt',{session:false, failureRedirect:"/"}), (req, res) => {
-
+    console.log(req.cookies)
     res.render('realTimeProducts',{style})
 })
 
@@ -46,3 +46,8 @@ router.get('/cart',passport.authenticate('jwt',{session:false, failureRedirect:"
     const cart =await cartdata()
     res.render('cartId',{style,cart})
     })
+
+router.get("/createproduct",passport.authenticate('jwt',{session:false, failureRedirect:"/"}),authLog(["admin"]), (req, res) => {
+    res.render("createProd",{style})
+
+})

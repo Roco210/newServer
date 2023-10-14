@@ -22,5 +22,5 @@ export const userLogIn = async (req, res) => {
 
 export const userLogOut = async (req, res) => {
     req.session.destroy()
-    res.clearCookie("token").redirect("/log")
+    res.clearCookie("token").clearCookie("connect.sid").redirect("/log")
 }

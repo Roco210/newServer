@@ -1,5 +1,7 @@
 import Router from 'express';
 import { paginateAllProd, SerchProdbyID, createProd,deleteProd, modifyProd} from '../controllers/products.controllers.js';
+
+
 const router = Router();
 
 router.get('/',paginateAllProd)
