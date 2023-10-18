@@ -6,13 +6,24 @@
         {{#each cart}}
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">prodId:{{this.prodId}}</h5>
-                <p class="card-text">quantity:{{this.quantity}}</p>
+                <h2 class="card-text">Title: {{this.title}}</h2>
+                <h5 class="card-title">prodId: {{this.id}}</h5>
+                <p class="card-text">quantity: {{this.quantity}}</p>
+                <p class="card-text">price: ${{this.price}}</p>
+                <p class="card-text">total: ${{this.total}}</p>
             </div>
         </div>
         {{/each}}
     </div>
+    <br>
+        <p>Total : {{total}}</p>
+    <br>
+    <form action={{purchase}}  method="get">
+        <input type="submit" value="PURCHASE" class="btn btn-success" >
+    </form>
     {{else}}
-    <h3>No product exists</h3>
+    <h3>No cart exists</h3>
+
+    
     {{/if}}
 </ul>

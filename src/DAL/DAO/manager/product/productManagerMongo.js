@@ -1,4 +1,4 @@
-import { productModel } from "../../../DAL/models/product.model.js";
+import { productModel } from "../../models/product.model.js";
 
 class ProductMongo {
 

@@ -16,9 +16,6 @@ class CartMongo {
         }
         catch(error){return error}}
 
-
-
-
     /* async deleteCart(id){
         try{
             const cart =cartModel.findByIdAndDelete(id)
@@ -27,7 +24,6 @@ class CartMongo {
         catch(error){return error}
     } */
     async updatecart(cid,pid){
-
         try{
             const fCart = await cartModel.findById(cid) //busco el carrito
             if(!fCart || fCart.name =="CastError" ){
@@ -36,8 +32,10 @@ class CartMongo {
             if(!fProd || fProd.name =="CastError" ){
             return "no existe producto con el Id"}
             const prod =fCart.products
-            if(!prod.length){
-                console.log("if")
+            prod.push(pid)
+            await cartModel.updateOne({_id:cid},fCart)
+            return "cart update"
+            /* if(!prod.length){
                 const obj = {prodId:pid,quantity:1}
                 prod.push(obj)
                 await cartModel.updateOne({_id:cid},fCart)
@@ -53,10 +51,8 @@ class CartMongo {
                 prod.push(obj)
                 await cartModel.updateOne({_id:cid},fCart)
                 return "cart update"
-                }
+                } */
             }
-    
-        }
         catch(error){return error}
     }
 
@@ -68,6 +64,7 @@ class CartMongo {
         await cartModel.findByIdAndUpdate(cid,cartF)
         return cartF
     }
+
     async delAllprods(cid){
         const cartF =await cartModel.findById(cid)
         if(cartF.products.length){
@@ -79,6 +76,7 @@ class CartMongo {
         
 
     }
+
     async putquantity(cid,pid,cant){
         const {quantity} =cant
         const cartF =await cartModel.findById(cid)
@@ -92,10 +90,16 @@ class CartMongo {
         const cartF =await cartModel.findById(cid)
         const prodInCart = cartF.products
         cartF.products=prod
-        
+        console.log(cartF)
         await cartModel.findByIdAndUpdate(cid,cartF)
+    }
 
+    async populateCart(cId){
+        const cart = await cartModel.findById(cId)
+        const cartList = await cart.populate("products")
+        return cartList
     }
 }
+
 
 export const cartMongo =new CartMongo()

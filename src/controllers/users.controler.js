@@ -1,6 +1,9 @@
 
-import {userMongo} from "../DAL/manager/users/usersManagerMongo.js"
+import {userMongo} from "../DAL/DAO/manager/users/usersManagerMongo.js";
 import { hashdata, generateToken  } from "../utils.js";
+import { userDto } from "../DAL/DTO/user.dto.js";
+
+
 
 
 export const Singup = async (req, res) => {
@@ -16,11 +19,13 @@ export const Singup = async (req, res) => {
 }
 
 export const userLogIn = async (req, res) => {
-    const token =  generateToken(req.user)
-    res.cookie("token", token, {httpOnly:true,maxAge:60*60*1000}).status(200).redirect("/")
+    const token =  generateToken(userDto(req.user))
+    res.cookie("token", token, {httpOnly:true,maxAge:60*30*1000}).status(200).redirect("/")
 }
 
 export const userLogOut = async (req, res) => {
     req.session.destroy()
     res.clearCookie("token").clearCookie("connect.sid").redirect("/log")
 }
+
+

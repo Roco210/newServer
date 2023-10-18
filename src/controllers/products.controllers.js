@@ -1,6 +1,6 @@
 
-import {productMongo} from "../DAL/manager/product/productManagerMongo.js"
-import { allProdsObj } from "../services/product.services.js"
+import {productMongo} from "../DAL/DAO/manager/product/productManagerMongo.js"
+
 
 export const paginateAllProd =async(req,res)=>{
     const {limit=10,page=1,sortPrice,...query} =req.query

@@ -7,7 +7,7 @@ import session from 'express-session';
 
 
 // DAL
-import "./DAL/dbConfig.js"
+import "./DAL/DAO/dbConfig.js"
 import MongoStore from "connect-mongo"
 
 //handlebars
@@ -17,12 +17,14 @@ import { engine } from "express-handlebars";
 
 // server
 import { Server } from "socket.io";
-import { msjModel } from "./DAL/manager/messages/messagesManager.js";
+import { msjModel } from "./DAL/DAO/manager/messages/messagesManager.js";
 //endpoints
 import viewrouter from "./routers/view.router.js"
 import userRouter from "./routers/users.router.js"
 import productsRouter from "./routers/products.router.js"
 import cartsRouter from './routers/carts.router.js';
+
+
 // passport
 import passport from "passport"
 import "./services/passport.js"
@@ -49,6 +51,7 @@ app.use(session({
         mongoUrl:config.mongoUrl,
         mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
     }),
+    cookie: {maxAge: 600000},
     secret:config.sessionSecret,
 }))
 
@@ -62,6 +65,8 @@ app.use("/",viewrouter)
 app.use("/api/users", userRouter)
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
+
+
 
 //conect
 

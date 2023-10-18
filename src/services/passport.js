@@ -4,8 +4,8 @@ import { Strategy as JWTstrategy, ExtractJwt} from "passport-jwt";
 import githubStrategy from "passport-github2";
 import {compareHash} from "../utils.js";
 import config  from "../config/config.js";
-import {userMongo} from "../DAL/manager/users/usersManagerMongo.js";
-import {userModel} from "../DAL/models/user.model.js";
+import {userMongo} from "../DAL/DAO/manager/users/usersManagerMongo.js";
+import {userModel} from "../DAL/DAO/models/user.model.js";
 //local Strategy
 
 passport.use("local", new localStrategy(
@@ -64,12 +64,15 @@ const cookieExtractor =  (req) => {
 passport.use("jwt",new JWTstrategy({
     secretOrKey:config.jwtSecret,
     jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor])
+    
 },
     async (jwt_payload, done) => {
         try {
+            
             return done(null, jwt_payload)
         }
-        catch (error) { done(null, false) }
+        catch (error) { 
+            done(null, false) }
     })) 
 
 

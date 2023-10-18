@@ -11,10 +11,12 @@ const userSchema = new mongoose.Schema({
     },
     username:{
         type:String,
+        unique:true
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     age:{
         type:String
@@ -32,8 +34,10 @@ const userSchema = new mongoose.Schema({
         requireed:true,
         default:false 
     },
-    cart:{
+    cartId:{
+        default:"null",
         type:String,
+        requireed:true
     }
 });
 

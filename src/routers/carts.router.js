@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createCart,serchCart,updateCart,updateProdInCart,addProdInCart, deleteCart,deleteProdCart} from "../controllers/carts.controler.js";
+import { createCart,purchase,serchCart,updateCart,updateProdInCart,addProdInCart, deleteCart,deleteProdCart} from "../controllers/carts.controler.js";
+import { purchaseEmail } from "../controllers/mailing.router.js";
+
+
 const router=Router()
 
 router.post("/",createCart)
@@ -15,6 +18,8 @@ router.delete('/:cid',deleteCart)
 router.put('/:cid/product/:pid',updateProdInCart)
 
 router.put('/:cid',addProdInCart)
+
+router.get("/:cid/purchase",purchase,purchaseEmail)
 
 
 export default router;
