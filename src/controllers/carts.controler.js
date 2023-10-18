@@ -92,9 +92,8 @@ export const addProdInCart = async (req, res) => {
 
 export const purchase = async (req, res,next) => {
     const { cid } = req.params
-    const user=req
-    console.log(user)
-    console.log(req.user)
+    const {email,first_name}=req.user
+    const userdto = {email,first_name}
     const userCart = await cartdata(cid)
     const purchase = userCart.map(async e => {
         const prod = await productMongo.getproductById(e.id)
@@ -116,7 +115,7 @@ export const purchase = async (req, res,next) => {
     const withOutStock = validateStock.filter(e => e.stock == 0)
     const purchaseProds = validateStock.filter(e => e.stock != 0)
     req.purchaseProds=purchaseProds
-
+    req.userEmail =userdto
     cartwhitoutstock(cid,withOutStock)
 
     next()

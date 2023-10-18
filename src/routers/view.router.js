@@ -45,7 +45,7 @@ router.get('/cart',passport.authenticate('jwt',{session:false, failureRedirect:"
     const cart =await cartdata(req.user.user.cartId)
     const total = await totalCart(cart)
     const purchase= `/api/carts/${req.user.user.cartId}/purchase`
-    req.user.user
+    req.user=req.user.user
     res.render('cartId',{style,cart,total,purchase})
     })
 
