@@ -36,7 +36,7 @@ router.get('/realTimeProducts',passport.authenticate('jwt',{session:false, failu
     res.render('realTimeProducts',{style})
 })
 
-router.get('/message', (req, res) => {
+router.get('/message',authLog(["user"]), (req, res) => {
 
     res.render('message',{style})
 })

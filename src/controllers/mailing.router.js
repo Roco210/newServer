@@ -6,6 +6,7 @@ import {transporter} from '../services/nodemailer.js';
 export const purchaseEmail= async (req, res) => {
     const user=req.userEmail
     const prod=req.purchaseProds
+    const code =req.code
     const total = prod.reduce((acc, p) => acc + p.total, 0);
     const prodMap=prod.map(p=>`<li>Producto:${p.title} Unidades: ${p.quantity}  precio: $${p.price} total: $${p.total}</li>`)
     const message = {
@@ -15,6 +16,7 @@ export const purchaseEmail= async (req, res) => {
         html:`
         <h1>Ticket de compra</h1>
         <h2>Hola ${user.first_name} tu compra se realizo con exito</h2>
+        <h3>Codigo de compra: ${code}</h3>
         ${prodMap}
         <p>Total: $${total}</p>`
     };

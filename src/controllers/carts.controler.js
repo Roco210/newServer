@@ -114,8 +114,10 @@ export const purchase = async (req, res,next) => {
     const validateStock = await Promise.all(purchase)
     const withOutStock = validateStock.filter(e => e.stock == 0)
     const purchaseProds = validateStock.filter(e => e.stock != 0)
+    const totalAmount = purchaseProds.reduce((acc, p) => acc + p.total, 0);
     req.purchaseProds=purchaseProds
     req.userEmail =userdto
+    req.totalAmount = totalAmount
     cartwhitoutstock(cid,withOutStock)
 
     next()

@@ -1,22 +1,25 @@
-import mongoose from "mongoose";
+import mongoose  from "mongoose";
 
-const ticketSchema =new mongoose.Schema(
+const ticketSchema = new mongoose.Schema(
+
     {
-        code:{
-            type:mongoose.Types.ObjectId(),
-            required:true,
-            unique:true},
-        purchase_datetime:{
-                type:Date,
-                unique:true
-            },
-            amount:{
-                type:Number
+        code: {
+            type: String,
+            required: true,
+            unique: true
         },
-        purchaser:{
-            type:String
-    }
+        purchase_datetime: {
+            type: Date,
+            unique: true
+        },
+        amount: {
+            type: Number
+        },
+        purchaser: {
+            type: String
+
+        }
     }
 )
 
-export default ticketmodel = mongoose.model('ticket',ticketSchema)
+export const ticketmodel = mongoose.model('ticket', ticketSchema)
