@@ -3,6 +3,9 @@ import passport from "passport";
 import { authLog, userInfo } from "../services/user.services.js";
 import {allProdsObj} from "../services/product.services.js";
 import {cartdata, totalCart} from "../services/cart.services.js";
+import NotFoundDocumentError from "../errors/CustomError.js";
+import { ErrorMessages } from "../errors/error.enum.js";
+import { erroMiddleware } from "../errors/error.middleware.js";
 
 const router=Router();
 const style="style1.css"
@@ -36,9 +39,10 @@ router.get('/realTimeProducts',passport.authenticate('jwt',{session:false, failu
     res.render('realTimeProducts',{style})
 })
 
-router.get('/message',authLog(["user"]), (req, res) => {
+router.get('/message',authLog(["user"]),erroMiddleware, (req, res) => {
 
     res.render('message',{style})
+    
 })
 
 router.get('/cart',passport.authenticate('jwt',{session:false, failureRedirect:"/"}),authLog(["user"]),async(req, res) => {

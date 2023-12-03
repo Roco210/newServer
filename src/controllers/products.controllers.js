@@ -1,5 +1,7 @@
 
 import {productMongo} from "../DAL/DAO/manager/product/productManagerMongo.js"
+import CustomError from "../errors/CustomError.js"
+import { ErrorMessages } from "../errors/error.enum.js"
 
 
 export const paginateAllProd =async(req,res)=>{
@@ -12,19 +14,22 @@ export const paginateAllProd =async(req,res)=>{
 }
 
 export const SerchProdbyID = async(req,res)=>{
-    const pid= req.query.id
-    console.log(pid)
-    if (pid.length != 24){
+    const {pid}= req.params
+    if (pid.length!= 24){
         res.status(400).json({mesage:`Use a correct Id`})
-        return}
+        return} 
     try{
+        /* */
         const prodById= await productMongo.getproductById(pid)
         if (!prodById || prodById.name== "CastError"){
-            res.status(400).json()
+            throw CustomError.createError(ErrorMessages.PRODUCT_NOT_FUND)
         }else{
             res.status(200).json({mesage:"product: ", prodById})
-    }}
-    catch(error){res.status(500).json({error})}
+        }
+    }catch(error){
+        CustomError.createError(ErrorMessages.PRODUCT_NOT_FUND)
+        
+    }
 }
 
 export const createProd = async(req,res)=>{
@@ -56,7 +61,9 @@ export const modifyProd =async(req,res)=>{
         }else{
             res.status(200).json({mesage:"product modify"})}
     }
-    catch(error){res.status(500).json({error})}
+    catch(error){
+        
+        res.status(500).json({error})}
 }
 
 export const deleteProd = async(req,res)=>{

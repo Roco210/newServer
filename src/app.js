@@ -23,6 +23,12 @@ import viewrouter from "./routers/view.router.js"
 import userRouter from "./routers/users.router.js"
 import productsRouter from "./routers/products.router.js"
 import cartsRouter from './routers/carts.router.js';
+import mockingproductsRouter from './routers/mockingproducts.router.js'
+
+//utils
+import { generateProduct, generateUser } from "./utils.js"
+
+
 
 
 // passport
@@ -30,6 +36,13 @@ import passport from "passport"
 import "./services/passport.js"
 //env
 import config from "./config/config.js"
+
+
+//error
+
+import NotFoundDocumentError from './errors/CustomError.js';
+import {ErrorMessages} from './errors/error.enum.js';
+import {erroMiddleware} from './errors/error.middleware.js'
 
 //server setings
 
@@ -48,11 +61,11 @@ app.set('view engine', 'handlebars');
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl:config.mongoUrl,
+        mongoUrl: config.mongoUrl,
         mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
     }),
-    cookie: {maxAge: 600000},
-    secret:config.sessionSecret,
+    cookie: { maxAge: 600000 },
+    secret: config.sessionSecret,
 }))
 
 //passport
@@ -61,11 +74,15 @@ app.use(passport.session());
 
 
 //endpoints
-app.use("/",viewrouter)
+app.use("/", viewrouter)
 app.use("/api/users", userRouter)
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
+app.use("/mockingproducts",mockingproductsRouter)
 
+// error
+
+app.use(erroMiddleware)
 
 
 //conect
@@ -94,3 +111,15 @@ socketServer.on('connection', async (socket) => {
         socketServer.emit("msjs", listmsjs)
     })
 })
+
+app.get("/test", (req, res) => {
+        NotFoundDocumentError.createError(ErrorMessages.PRODUCT_NOT_FUND)
+}
+)
+
+
+
+console.log(generateProduct())
+
+console.log(generateUser())
+

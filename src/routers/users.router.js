@@ -2,12 +2,13 @@ import Router from "express";
 import passport from "passport";
 import { Singup, userLogIn, userLogOut} from "../controllers/users.controler.js";
 import { checkData } from "../services/user.services.js";
+import { erroMiddleware } from "../errors/error.middleware.js";
 const router = Router();
 
 
 router.post('/',checkData, Singup)
 
-router.post("/login",passport.authenticate('local',{failureRedirect: '/singup'}), userLogIn)
+router.post("/login",passport.authenticate('local',{failureRedirect: '/singup'}), userLogIn,erroMiddleware)
 
 router.get("/logout", userLogOut)
 
