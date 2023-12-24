@@ -21,11 +21,12 @@ async addCartToUser(cartId,email){
     try{
         const user = await this.findUser(email)
         user.cartId = cartId
-        console.log(user)
         await userModel.findOneAndUpdate({email},user)
     }
     catch(error){return error}
 }
+
+
 
 async modifyUser(user){
     try{

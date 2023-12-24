@@ -32,7 +32,6 @@ router.get('/singup', async (req, res) => {
 
 router.get('/allproducts',passport.authenticate('jwt',{session:false, failureRedirect:"/log"}),authLog(allRol), async (req, res) => {
     const allProdMap = await allProdsObj()
-    console.log(allProdMap)
     res.render('allprod',{style,allProdMap})
     })
 
@@ -52,7 +51,7 @@ router.get('/cart',passport.authenticate('jwt',{session:false, failureRedirect:"
     const cart =await cartdata(req.user.user.cartId)
     const total = await totalCart(cart)
     const purchase= `/api/carts/${req.user.user.cartId}/purchase`
-    req.user=req.user.user
+    console.log(cart)
     res.render('cartId',{style,cart,total,purchase})
     })
 

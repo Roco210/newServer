@@ -8,11 +8,10 @@ export const createCart = async (req, res) => {
     try {
         const cart = await cartMongo.getCarts()
         const cartId = cart
-
-        /* newCartUser(cartId,email) */
-        res.status(200).json({ mesage: 'Cart created' })
+        return cart.id
+        
     }
-    catch (error) { res.status(500).json({ error }) }
+    catch (error) { res.status(400).json({ error }) }
 }
 
 export const serchCart = async (req, res) => {

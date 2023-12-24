@@ -6,6 +6,7 @@ import {compareHash} from "../utils.js";
 import config  from "../config/config.js";
 import {userMongo} from "../DAL/DAO/manager/users/usersManagerMongo.js";
 import {userModel} from "../DAL/DAO/models/user.model.js";
+import {newCart} from "../services/cart.services.js"
 //local Strategy
 
 passport.use("local", new localStrategy(
@@ -29,23 +30,26 @@ passport.use("local", new localStrategy(
 
 // github Strategy
 
-passport.use(new githubStrategy(
+passport.use  (new githubStrategy(
     {clientID: config.clientId,
     clientSecret: config.clientSecret,
     callbackURL:'http://localhost:8080/api/users/github'},
     async function (accessToken, refreshToken, profile, done) {
+
             try {
                 const userbd = await userMongo.findUser(profile._json.email)
                 if(userbd){
                     return done(null, userbd)
                 } 
-                const newUser={
+                
+                const  newUser={
                     first_name:profile.displayName? profile.displayName.split(" ")[0]:profile.username,
                     last_name: profile.displayName? profile.displayName.split(" ")[1]: " no lastname",  
                     username: profile.username ? profile.username : "no user name",
                     email: profile._json.email? profile._json.email: "no mail",
                     password: " ", 
-                    githubLog:"true"}
+                    githubLog:"true",
+                    isAdmin:"premium"}
                 await userMongo.createUser(newUser)
                 return  done(null, newUser)}
             catch(error){

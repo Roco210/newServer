@@ -3,10 +3,11 @@ import passport from "passport";
 import { Singup, userLogIn, userLogOut,forgotPassword,createNewPass} from "../controllers/users.controler.js";
 import { checkData,changePass,checklink } from "../services/user.services.js";
 import { erroMiddleware } from "../errors/error.middleware.js";
+import {newCart} from "../services/cart.services.js"
 const router = Router();
 
 
-router.post('/',checkData, Singup)
+router.post('/',checkData,newCart, Singup)
 
 router.post("/login",passport.authenticate('local',{failureRedirect: '/singup'}), userLogIn,erroMiddleware)
 

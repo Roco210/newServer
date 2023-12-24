@@ -4,18 +4,20 @@ import { hashdata, generateToken,generateTokenXHour, verifyToken, compareHash  }
 import { userDto, userDtoPass } from "../DAL/DTO/user.dto.js";
 import { changePassMail } from "../controllers/mailing.router.js"
 
+import { ne } from "@faker-js/faker";
 
 
 
 export const Singup = async (req, res) => {
     const data = req.user
+    const cart =req.cart
     const userExist = await userMongo.findUser(data.email)
     if (userExist) {
         res.status(400).json({ messge: "plase use other mail" })
         return
     }
     const hashPassword = await hashdata(data.password)
-    const user = await userMongo.createUser({ ...req.body, password: hashPassword })
+    const user = await userMongo.createUser({ ...req.body, password: hashPassword,cartId:cart})
     res.status(200).json({ message: `user created: ${user}` })
     
 }
