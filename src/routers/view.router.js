@@ -58,4 +58,12 @@ router.get("/createproduct",passport.authenticate('jwt',{session:false, failureR
 
 })
 
+router.get("/forgotPass",(req,res)=>{
+    res.render("forgotPass",{style})
+})
+
+router.get("/changepass",(req,res)=>{
+    res.render("changePass",{style})
+})
+
 export default router;

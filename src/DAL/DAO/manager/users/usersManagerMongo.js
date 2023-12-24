@@ -27,5 +27,13 @@ async addCartToUser(cartId,email){
     catch(error){return error}
 }
 
+async modifyUser(user){
+    try{
+        const userId= user._id
+
+        await userModel.updateOne({_id:userId},user)
+
+    }catch(error){return error}
+}
 }
 export const userMongo= new UserMongo();

@@ -1,0 +1,19 @@
+<h2>¿Olvidaste tu clave?</h2>
+
+<h3>ingresa tu correo electronico</h3>
+
+<form action="/api/users/forgotpassword" method="post">
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Coreo: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" name="correo" id="correo">
+        </div>
+    </div>
+    <br>
+    <br>
+    <input type="submit" value="SEND" class="btn btn-success"><br>
+</form><br>
+
+<a href="/"><button class="btn btn-success">LOG IN</button></a>

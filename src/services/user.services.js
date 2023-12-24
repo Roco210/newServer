@@ -1,5 +1,5 @@
 import {userMongo} from "../DAL/DAO/manager/users/usersManagerMongo.js"
-
+import {verifyToken} from "../utils.js"
 
 export const checkData =(req, res,next) => {
     const { first_name,last_name, email, age, password } = req.body
@@ -34,6 +34,29 @@ export const authLog =  (roles)=>{
     }
     
 } 
+
+export const changePass =async(req,res,next)=>{
+    const {correo}=req.body
+    const userExist= await userMongo.findUser(correo)
+    if (userExist){
+        req.userExist=userExist
+        next()
+    }else{
+        res.redirect("/forgotPass")
+    }
+    
+}
+
+export const checklink = async(req,res)=>{
+    const {jwt}=req.params
+    const dato =verifyToken(jwt)
+    if (dato==null){
+        res.status(500).redirect("/forgotPass")
+    }else{res.cookie("token",jwt).status(200).redirect("/changepass")
+}
+    
+
+}
     
     
     

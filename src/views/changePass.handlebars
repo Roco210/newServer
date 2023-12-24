@@ -1,0 +1,25 @@
+<h2>CAMBIA TU CONTRASEÑA</h2>
+
+<form action="/api/users/newpass" method="post">
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Nueva contraseña: </label>
+        </div>
+        <div class="col-auto">
+            <input type="password" class="form-control" name="newPass" id="newPass">
+        </div>
+    </div>
+    <br>
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-auto">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Repite contraseña: </label>
+        </div>
+        <div class="col-auto">
+            <input type="password" class="form-control" name="newPass2" id="newPass2">
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="SEND" class="btn btn-success" id="send"><br>
+</form><br>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./js/pass.js"></script>

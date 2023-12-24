@@ -24,6 +24,21 @@ export const generateToken = (user) => {
     return token
 }
 
+export const generateTokenXHour = (user,time) => {
+    const token = jwt.sign({user}, config.jwtSecret,{expiresIn:time})
+    
+    return token
+}
+
+export const verifyToken =(token)=>{
+    try{
+        const decoded= jwt.verify(token,config.jwtSecret)
+    return decoded}
+    catch(error){console.log(error)
+    }
+
+}
+
 //faker
 
 const faker = new Faker({locale:[es]});

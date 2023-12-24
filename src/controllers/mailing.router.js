@@ -24,5 +24,23 @@ export const purchaseEmail= async (req, res) => {
 res.status(200).redirect("/")
 }
 
+export const changePassMail= async (email,token) => {
+    const correo =email
+    const message = {
+        from:"coder",
+        to:correo,
+        subject:"cambio de contraseña",
+        html:`
+        <h1>cambia tu calve aqui</h1>
+        <h2>accede al siguiente enlace para cambiar de clave</h2>
+        <a href="http://localhost:8080/api/users/modifylinkpass/${token}">
+        <button type="button" class="btn btn-success">Cambiar contraseña</button>
+        <a>
+        `
+    };
+    console.log(message)
+    await transporter.sendMail(message)
+
+}
 
 
