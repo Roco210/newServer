@@ -27,7 +27,8 @@ const userSchema = new mongoose.Schema({
     isAdmin:{
         type:String,
         required:true,
-        default:"user" 
+        default:"user",
+        enum:["user","premium","admin"]
     },
     githubLog:{
         type:Boolean,
